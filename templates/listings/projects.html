@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block content %}
+
+
+<!-- property-page-section -->
+<section class="property-page-section property-grid">
+    <div class="auto-container">
+        <div class="row clearfix">
+    </div>
+</div>
+</div>
+
+
+</div>
+</div>
+<div class="col-lg-8 col-md-12 col-sm-12 content-side">
+    <div class="property-content-side">
+        <div class="wrapper grid">
+            <div class="deals-grid-content grid-item">
+                <div class="row clearfix">
+                    {% if projects %} 
+                    {% for project in projects %}
+                    <div class="col-lg-6 col-md-6 col-sm-12 feature-block">
+
+                        <div class="feature-block-one">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="{{ project.photo_main.url }}" alt=""></figure>
+
+                                </div>
+                                <div class="lower-content">
+                                    <div class="title-text pt-4"><h4><a href="">{{project.title}}</a></h4></div>
+                                    <div class="price-box clearfix">
+                                        <div class="price-info pull-left">
+                                            <h6>Start From</h6>
+                                            <h4>{{project.price}} TK</h4>
+                                        </div>
+                                        <ul class="other-option pull-right clearfix">
+                                            <li><a href=""><i class="icon-12"></i></a></li>
+                                            <li><a href=""><i class="icon-13"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <p>{{project.short_description}}</p>
+                                    <div class="btn-box"><a href="{% url 'project' project.id %}" class="theme-btn btn-two">See Details</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <h2>No Projects available </h2>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <div class="pagination-wrapper">
+           {% if projects.has_other_pages %}
+            <ul class="pagination">
+                    {% if projects.has_previous %}
+                    <li><a href="?page={{ projects.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% for i in projects.paginator.page_range %}
+                    {% if projects.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+
+
+                    {% if projects.has_next %}
+                    <li><a href="?page={{ projects.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+            </ul>
+        {% endif %}
+
+
+    </ul>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- property-page-section end -->
+
+
+{% endblock %}
+
